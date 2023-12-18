@@ -29,7 +29,11 @@ class AuthViewModel: ObservableObject {
   static private var scope = getScopesUsing([.userReadRecentlyPlayed, .userTopRead, .userReadPlaybackPosition,
                                              .userLibraryRead, .userLibraryModify, .userFollowRead, .userFollowModify,
                                              .playlistModifyPublic, .playlistModifyPrivate, .playlistReadPrivate])
+  
+  
   static private var redirectURI = "https://www.github.com"
+
+
   static var url = apiAuth.getAuthURL(clientID: clientID, scope: scope, redirectURI: redirectURI)
 
   func isSpotifyResponseCode(url: String) {
