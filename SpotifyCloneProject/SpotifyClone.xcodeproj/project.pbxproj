@@ -49,13 +49,11 @@
 		C081873226EF728100AB19E9 /* APIAuthentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873126EF728100AB19E9 /* APIAuthentication.swift */; };
 		C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873426EF97DF00AB19E9 /* AuthScreen.swift */; };
 		C081873726EF9A2700AB19E9 /* AuthWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873626EF9A2700AB19E9 /* AuthWebView.swift */; };
-		C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873826EFBABF00AB19E9 /* AuthViewModel.swift */; };
 		C081873B26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */; };
 		C081873D26F0168700AB19E9 /* AuthKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = C081873C26F0168700AB19E9 /* AuthKey.swift */; };
 		C082720B270646090086E34F /* MediaDetailsPageAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C082720A270646090086E34F /* MediaDetailsPageAPICalls.swift */; };
 		C083314E2716838C00B6923F /* APIFetchingBasicInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C083314D2716838C00B6923F /* APIFetchingBasicInfo.swift */; };
 		C084267E26F10BBD000ACAEE /* HomePageAPICalls.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267D26F10BBD000ACAEE /* HomePageAPICalls.swift */; };
-		C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */; };
 		C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268326F11CF7000ACAEE /* YourSensitiveData.swift */; };
 		C084268626F14A7E000ACAEE /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268526F14A7E000ACAEE /* RemoteImage.swift */; };
 		C084268826F1588B000ACAEE /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C084268726F1588B000ACAEE /* MainViewModel.swift */; };
@@ -226,13 +224,11 @@
 		C081873126EF728100AB19E9 /* APIAuthentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIAuthentication.swift; sourceTree = "<group>"; };
 		C081873426EF97DF00AB19E9 /* AuthScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthScreen.swift; sourceTree = "<group>"; };
 		C081873626EF9A2700AB19E9 /* AuthWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthWebView.swift; sourceTree = "<group>"; };
-		C081873826EFBABF00AB19E9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		C081873A26EFC72B00AB19E9 /* AuthAuxiliaryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAuxiliaryViews.swift; sourceTree = "<group>"; };
 		C081873C26F0168700AB19E9 /* AuthKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthKey.swift; sourceTree = "<group>"; };
 		C082720A270646090086E34F /* MediaDetailsPageAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaDetailsPageAPICalls.swift; sourceTree = "<group>"; };
 		C083314D2716838C00B6923F /* APIFetchingBasicInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIFetchingBasicInfo.swift; sourceTree = "<group>"; };
 		C084267D26F10BBD000ACAEE /* HomePageAPICalls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePageAPICalls.swift; sourceTree = "<group>"; };
-		C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCoordinator.swift; sourceTree = "<group>"; };
 		C084268326F11CF7000ACAEE /* YourSensitiveData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YourSensitiveData.swift; sourceTree = "<group>"; };
 		C084268526F14A7E000ACAEE /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		C084268726F1588B000ACAEE /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
@@ -478,8 +474,6 @@
 		C084268126F10DF3000ACAEE /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				C081873826EFBABF00AB19E9 /* AuthViewModel.swift */,
-				C084267F26F10DC8000ACAEE /* AuthCoordinator.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1295,7 +1289,6 @@
 				C089875D27000DE800F9BF70 /* TrackDetailScreen.swift in Sources */,
 				C0F8199B26FE4F9B000F5FEE /* ArtistResponseType.swift in Sources */,
 				C02188CE2725EB740038203C /* YourEpisodesScrollScreen.swift in Sources */,
-				C081873926EFBABF00AB19E9 /* AuthViewModel.swift in Sources */,
 				C084268426F11CF7000ACAEE /* YourSensitiveData.swift in Sources */,
 				C082720B270646090086E34F /* MediaDetailsPageAPICalls.swift in Sources */,
 				C0F8198F26FE4E1B000F5FEE /* PlaylistResponseType.swift in Sources */,
@@ -1339,7 +1332,6 @@
 				C08D2DAF27107E2C003EB95C /* ActiveSearchViewModel.swift in Sources */,
 				C08B90B1271D1BCD00C057B2 /* MediaDetailAPICalls.swift in Sources */,
 				C0A07F0127132FB20069B664 /* SearchResponseItem.swift in Sources */,
-				C084268026F10DC8000ACAEE /* AuthCoordinator.swift in Sources */,
 				C0FB4FE5272080B800E61982 /* MyLibraryTopBar.swift in Sources */,
 				C084E04E270340E500C6AAAE /* BigPlayButton.swift in Sources */,
 				C080CE242700A210003D0C11 /* BigTrackImage.swift in Sources */,
@@ -1550,7 +1542,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyClone/Preview Content\"";
-				DEVELOPMENT_TEAM = YXP9U88588;
+				DEVELOPMENT_TEAM = 69N756Q384;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1592,7 +1584,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"SpotifyClone/Preview Content\"";
-				DEVELOPMENT_TEAM = YXP9U88588;
+				DEVELOPMENT_TEAM = 69N756Q384;
 				ENABLE_PREVIEWS = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",

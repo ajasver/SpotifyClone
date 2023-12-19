@@ -9,7 +9,6 @@ import SwiftUI
 
 struct MainView: View {
   @StateObject var mainVM: MainViewModel
-  @StateObject var authVM: AuthViewModel
   @StateObject var homeVM: HomeViewModel
   @StateObject var myLibraryVM: MyLibraryViewModel
   @StateObject var searchVM: SearchViewModel
@@ -19,7 +18,6 @@ struct MainView: View {
 
   init(mainViewModel: MainViewModel) {
     _mainVM = StateObject(wrappedValue: mainViewModel)
-    _authVM = StateObject(wrappedValue: AuthViewModel(mainViewModel: mainViewModel))
     _homeVM = StateObject(wrappedValue: HomeViewModel(mainViewModel: mainViewModel))
     _myLibraryVM = StateObject(wrappedValue: MyLibraryViewModel(mainViewModel: mainViewModel))
     _searchVM = StateObject(wrappedValue: SearchViewModel(mainVM: mainViewModel))
@@ -53,7 +51,7 @@ struct MainView: View {
       .navigationBarTitle("")
       .navigationBarHidden(true)
     } else {
-      AuthScreen(authViewModel: AuthViewModel(mainViewModel: mainVM))
+      AuthScreen(mainViewModel: mainVM)
         .navigationBarTitle("")
         .navigationBarHidden(true)
     }

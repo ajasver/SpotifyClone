@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct AuthScreen: View {
-  @StateObject var authViewModel: AuthViewModel
-  @State var isShowingAuthWebView = false
+  @StateObject var mainViewModel: MainViewModel
+  @State var isShowingAuthWebView: Bool = false
+
 
   var body: some View {
     GeometryReader { geometry in
@@ -26,7 +27,7 @@ struct AuthScreen: View {
             .padding(.vertical, Constants.paddingLarge)
           Spacer()
           HStack {
-            Text("Millions of songs.\nFree on Spotify.")
+            Text("Tali's Version")
               .font(.avenir(.black, size: geometry.size.width / 12))
               .tracking(-1)
             Spacer()
@@ -36,24 +37,11 @@ struct AuthScreen: View {
           .padding(.vertical, geometry.size.height / 15)
 
           VStack {
-            RoundedButton(text: "SIGN UP FREE") {
+            RoundedButton(text: "Sign in with Spotify") {
+              mainViewModel.authorize()
               isShowingAuthWebView = true
             }
               .padding(.bottom, 10)
-
-            RoundedButton(text: "CONTINUE WITH FACEBOOK",
-                          isFilled: false,
-                          isStroked: true,
-                          icon: Image("facebook-small-logo")) {
-              isShowingAuthWebView = true
-              print("\n\n >>> CAUTION: Not sign in manually is still causing crashes in some cases. \n\n")
-            }
-              .padding(.bottom, 20)
-            RoundedButton(text: "LOG IN",
-                          isFilled: false,
-                          isStroked: false) {
-              isShowingAuthWebView = true
-            }
           }
           .frame(maxWidth: .infinity)
           .padding(.vertical, Constants.paddingLarge)
@@ -61,8 +49,7 @@ struct AuthScreen: View {
         .padding(.horizontal, Constants.paddingLarge)
       }
       .sheet(isPresented: $isShowingAuthWebView, content: {
-        AuthSheetView(authViewModel: authViewModel,
-                      isShowingSheetView: $isShowingAuthWebView)
+        AuthSheetView(isShowingSheetView: $isShowingAuthWebView)
       })
     }
   }
