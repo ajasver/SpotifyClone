@@ -10,7 +10,10 @@
 		05776DD17531AE4F13C053F1 /* Pods_SpotifyClone_SpotifyCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */; };
 		21A26DF52B300B0D00ADCF11 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A26DF42B300B0D00ADCF11 /* SpotifyiOS.framework */; };
 		21A26DF82B300E3200ADCF11 /* SpotifyClone-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A26DF72B300E3200ADCF11 /* SpotifyClone-Bridging-Header.m */; };
-		21A26DFC2B301E7600ADCF11 /* SpotifyRemoteDelgate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A26DF92B301C4500ADCF11 /* SpotifyRemoteDelgate.swift */; };
+		21A26DFE2B30213300ADCF11 /* SpotifyRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A26DFD2B30213300ADCF11 /* SpotifyRemote.swift */; };
+		21A26DFF2B30213800ADCF11 /* SpotifyCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C5D26DD144E00532792 /* SpotifyCloneApp.swift */; };
+		21A26E022B30242200ADCF11 /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 21A26E012B30242200ADCF11 /* Algorithms */; };
+		21A26E072B30269A00ADCF11 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A26E062B30269A00ADCF11 /* SpotifyiOS.framework */; };
 		76AA60019401CBE4BC1DCE1F /* Pods_SpotifyCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6A25E39009EAB848647A176B /* Pods_SpotifyCloneTests.framework */; };
 		C016E605270344C200EFF870 /* AlbumDetailScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E604270344C200EFF870 /* AlbumDetailScreen.swift */; };
 		C016E607270345CA00EFF870 /* TracksVerticalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C016E606270345CA00EFF870 /* TracksVerticalScrollView.swift */; };
@@ -132,7 +135,6 @@
 		C0C5F9762704F76D0099EEB5 /* ArtistAlbums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F9752704F76D0099EEB5 /* ArtistAlbums.swift */; };
 		C0C5F9782704F9E70099EEB5 /* SeeMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F9772704F9E70099EEB5 /* SeeMoreButton.swift */; };
 		C0C5F97A2704FB930099EEB5 /* ArtistMediaHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C5F9792704FB930099EEB5 /* ArtistMediaHorizontalScrollView.swift */; };
-		C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C5D26DD144E00532792 /* SpotifyCloneApp.swift */; };
 		C0C63C6026DD144E00532792 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C5F26DD144E00532792 /* MainView.swift */; };
 		C0C63C6526DD145000532792 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C0C63C6426DD145000532792 /* Preview Assets.xcassets */; };
 		C0C63C7026DD145000532792 /* SpotifyCloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0C63C6F26DD145000532792 /* SpotifyCloneTests.swift */; };
@@ -183,7 +185,8 @@
 		21A26DF42B300B0D00ADCF11 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		21A26DF62B300E3100ADCF11 /* SpotifyClone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpotifyClone-Bridging-Header.h"; sourceTree = "<group>"; };
 		21A26DF72B300E3200ADCF11 /* SpotifyClone-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpotifyClone-Bridging-Header.m"; sourceTree = "<group>"; };
-		21A26DF92B301C4500ADCF11 /* SpotifyRemoteDelgate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyRemoteDelgate.swift; sourceTree = "<group>"; };
+		21A26DFD2B30213300ADCF11 /* SpotifyRemote.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyRemote.swift; sourceTree = "<group>"; };
+		21A26E062B30269A00ADCF11 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = SOURCE_ROOT; };
 		512CD52A8B5E5FF24C64D696 /* Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyClone-SpotifyCloneUITests/Pods-SpotifyClone-SpotifyCloneUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5F4C1A6C59B345B85DC7AC22 /* Pods-SpotifyCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyCloneTests.debug.xcconfig"; path = "Target Support Files/Pods-SpotifyCloneTests/Pods-SpotifyCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
 		6A25E39009EAB848647A176B /* Pods_SpotifyCloneTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SpotifyCloneTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -349,6 +352,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				21A26E022B30242200ADCF11 /* Algorithms in Frameworks */,
+				21A26E072B30269A00ADCF11 /* SpotifyiOS.framework in Frameworks */,
 				E814D7692793EF526E835DE5 /* Pods_SpotifyClone.framework in Frameworks */,
 				21A26DF52B300B0D00ADCF11 /* SpotifyiOS.framework in Frameworks */,
 			);
@@ -373,6 +378,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		21A26E052B30259D00ADCF11 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		5A4DF587E82EF547D5926BB8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -569,6 +581,7 @@
 		C087B0EF26E664BC00A72A13 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				21A26DF42B300B0D00ADCF11 /* SpotifyiOS.framework */,
 				C0817FEC27273F8F00F3D290 /* FilterableViewModelProtocol.swift */,
 			);
 			path = Protocols;
@@ -810,12 +823,14 @@
 		C0C63C5C26DD144E00532792 /* SpotifyClone */ = {
 			isa = PBXGroup;
 			children = (
+				21A26E062B30269A00ADCF11 /* SpotifyiOS.framework */,
 				C087B0E926E65FE700A72A13 /* Model */,
 				C087B0E126E6546300A72A13 /* ViewModels */,
 				C088F22F26DED7F400C4BCA2 /* Views */,
 				C081873026EF725700AB19E9 /* Service */,
 				C0C63C5D26DD144E00532792 /* SpotifyCloneApp.swift */,
-				21A26DF92B301C4500ADCF11 /* SpotifyRemoteDelgate.swift */,
+				21A26DFD2B30213300ADCF11 /* SpotifyRemote.swift */,
+				21A26E052B30259D00ADCF11 /* New Group */,
 				C0C63C5F26DD144E00532792 /* MainView.swift */,
 				C087B0EC26E660DE00A72A13 /* CustomTypes */,
 				C088F23826DEE0B400C4BCA2 /* CustomViews */,
@@ -944,7 +959,6 @@
 		C1B051469A676817097FE5BB /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				21A26DF42B300B0D00ADCF11 /* SpotifyiOS.framework */,
 				B75A3140099F8C9F0EBC8917 /* Pods_SpotifyClone.framework */,
 				D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */,
 				6A25E39009EAB848647A176B /* Pods_SpotifyCloneTests.framework */,
@@ -972,6 +986,9 @@
 			dependencies = (
 			);
 			name = SpotifyClone;
+			packageProductDependencies = (
+				21A26E012B30242200ADCF11 /* Algorithms */,
+			);
 			productName = SpotifyClone;
 			productReference = C0C63C5A26DD144E00532792 /* SpotifyClone.app */;
 			productType = "com.apple.product-type.application";
@@ -1047,6 +1064,9 @@
 				Base,
 			);
 			mainGroup = C0C63C5126DD144E00532792;
+			packageReferences = (
+				21A26E002B30242200ADCF11 /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+			);
 			productRefGroup = C0C63C5B26DD144E00532792 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1231,6 +1251,7 @@
 				C089874B27000BFC00F9BF70 /* TopGradient.swift in Sources */,
 				C089875B27000CE600F9BF70 /* BackButton.swift in Sources */,
 				C089874D27000C1900F9BF70 /* BigMediaCover.swift in Sources */,
+				21A26DFF2B30213800ADCF11 /* SpotifyCloneApp.swift in Sources */,
 				C080CE202700A172003D0C11 /* SmallTopSection.swift in Sources */,
 				C08861AD270BB15700D6AD89 /* AudioSlider.swift in Sources */,
 				C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */,
@@ -1238,7 +1259,7 @@
 				C0817FED27273F8F00F3D290 /* FilterableViewModelProtocol.swift in Sources */,
 				C09552942704B16C000499B3 /* APIFetchingShows.swift in Sources */,
 				C080CE262700A22F003D0C11 /* PlayerControllerSection.swift in Sources */,
-				21A26DFC2B301E7600ADCF11 /* SpotifyRemoteDelgate.swift in Sources */,
+				21A26DFE2B30213300ADCF11 /* SpotifyRemote.swift in Sources */,
 				C0883A0926E2703D00E1ADFA /* SearchBarSection.swift in Sources */,
 				C081873526EF97DF00AB19E9 /* AuthScreen.swift in Sources */,
 				C09552962704B3B3000499B3 /* APIFetchingPlaylists.swift in Sources */,
@@ -1308,7 +1329,6 @@
 				C081873726EF9A2700AB19E9 /* AuthWebView.swift in Sources */,
 				C08839FF26E26E8400E1ADFA /* BigSongCoversScrollView.swift in Sources */,
 				C0FB4FE027205E8E00E61982 /* MyLibraryPageAPICalls.swift in Sources */,
-				C0C63C5E26DD144E00532792 /* SpotifyCloneApp.swift in Sources */,
 				C0EFE6F32728E7220072C92B /* SearchPageAPICalls.swift in Sources */,
 				C073D43527190B2F00C2B3AD /* EpisodeDetailsResponse.swift in Sources */,
 				C0FB4FE72720811E00E61982 /* MyLibraryItemsScrollView.swift in Sources */,
@@ -1535,6 +1555,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SpotifyClone",
 				);
 				INFOPLIST_FILE = SpotifyClone/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1576,6 +1597,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/SpotifyClone",
 				);
 				INFOPLIST_FILE = SpotifyClone/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -1725,6 +1747,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		21A26E002B30242200ADCF11 /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		21A26E012B30242200ADCF11 /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 21A26E002B30242200ADCF11 /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C0C63C5226DD144E00532792 /* Project object */;
 }
