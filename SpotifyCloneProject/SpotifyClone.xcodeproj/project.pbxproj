@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		05776DD17531AE4F13C053F1 /* Pods_SpotifyClone_SpotifyCloneUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D6E0A4C3B34E520C39ADB989 /* Pods_SpotifyClone_SpotifyCloneUITests.framework */; };
+		21920A5B2B32BFD800BB22C3 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21920A592B32BFD700BB22C3 /* AuthViewModel.swift */; };
 		21A26DF52B300B0D00ADCF11 /* SpotifyiOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 21A26DF42B300B0D00ADCF11 /* SpotifyiOS.framework */; };
 		21A26DF82B300E3200ADCF11 /* SpotifyClone-Bridging-Header.m in Sources */ = {isa = PBXBuildFile; fileRef = 21A26DF72B300E3200ADCF11 /* SpotifyClone-Bridging-Header.m */; };
 		21A26DFE2B30213300ADCF11 /* SpotifyRemote.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21A26DFD2B30213300ADCF11 /* SpotifyRemote.swift */; };
@@ -180,6 +181,7 @@
 /* Begin PBXFileReference section */
 		1E58E6B912DA5A97726C116C /* Pods-SpotifyClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyClone.release.xcconfig"; path = "Target Support Files/Pods-SpotifyClone/Pods-SpotifyClone.release.xcconfig"; sourceTree = "<group>"; };
 		20B3099CA990A6EB28639B67 /* Pods-SpotifyCloneTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SpotifyCloneTests.release.xcconfig"; path = "Target Support Files/Pods-SpotifyCloneTests/Pods-SpotifyCloneTests.release.xcconfig"; sourceTree = "<group>"; };
+		21920A592B32BFD700BB22C3 /* AuthViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		21A26DF42B300B0D00ADCF11 /* SpotifyiOS.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyiOS.framework; sourceTree = "<group>"; };
 		21A26DF62B300E3100ADCF11 /* SpotifyClone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SpotifyClone-Bridging-Header.h"; sourceTree = "<group>"; };
 		21A26DF72B300E3200ADCF11 /* SpotifyClone-Bridging-Header.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "SpotifyClone-Bridging-Header.m"; sourceTree = "<group>"; };
@@ -474,6 +476,7 @@
 		C084268126F10DF3000ACAEE /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				21920A592B32BFD700BB22C3 /* AuthViewModel.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -1249,6 +1252,7 @@
 				C080CE202700A172003D0C11 /* SmallTopSection.swift in Sources */,
 				C08861AD270BB15700D6AD89 /* AudioSlider.swift in Sources */,
 				C016E61527038BEF00EFF870 /* SmallMediaCover.swift in Sources */,
+				21920A5B2B32BFD800BB22C3 /* AuthViewModel.swift in Sources */,
 				C089135F26F9816F00CA1A69 /* ActiveSearchPageAPICalls.swift in Sources */,
 				C0817FED27273F8F00F3D290 /* FilterableViewModelProtocol.swift in Sources */,
 				C09552942704B16C000499B3 /* APIFetchingShows.swift in Sources */,
@@ -1565,7 +1569,7 @@
 					"\"Introspect\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gabrieldm.SpotifyClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ajx.talisversion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SpotifyClone/SpotifyClone-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1607,7 +1611,7 @@
 					"\"Introspect\"",
 					"-ObjC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.gabrieldm.SpotifyClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ajx.talisversion;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SpotifyClone/SpotifyClone-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

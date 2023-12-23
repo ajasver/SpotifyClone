@@ -27,7 +27,10 @@ struct MainView: View {
   var body: some View {
     if mainVM.homeScreenIsReady {
       ZStack {
-        Color.spotifyDarkGray.ignoresSafeArea()
+        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9989100099, green: 0.7796276808, blue: 0.7581660151, alpha: 1)), Color(#colorLiteral(red: 0.4884283543, green: 0.7279313803, blue: 0.7800245881, alpha: 1))]),
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing)
+        .ignoresSafeArea()
         switch mainVM.currentPage {
         case .home:
           HomeScreen()

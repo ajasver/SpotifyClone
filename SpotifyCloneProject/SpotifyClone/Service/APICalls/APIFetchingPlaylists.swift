@@ -38,6 +38,9 @@ class APIFetchingPlaylists {
       baseUrl = "https://api.spotify.com/v1/me/playlists"
     }
 
+    print(accessToken)
+    print(baseUrl)
+
     let urlRequest = Utility.createStandardURLRequest(url: baseUrl, accessToken: accessToken)
 
     AF.request(urlRequest)
@@ -61,7 +64,7 @@ class APIFetchingPlaylists {
 
       let sectionTitle = response.value!.message
       let title = playlist.name
-      let imageURL = playlist.images[0].url
+      let imageURL: String = playlist.images.isEmpty ? "" : playlist.images[0].url
       let id = playlist.id
 
       let description = playlist.description

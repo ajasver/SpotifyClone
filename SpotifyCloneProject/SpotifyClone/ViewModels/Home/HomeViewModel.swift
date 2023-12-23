@@ -56,10 +56,11 @@ class HomeViewModel: ObservableObject {
     case userFavoriteTracks = "Songs You Love"
     case userFavoriteArtists = "Your Artists"
     case recentlyPlayed = "Recently Played"
-    case newReleases = "New Releases"
+    case newReleases = "Taylor's Versions"
     case topPodcasts = "Top Podcasts"
     case artistTopTracks = "Artist Top Tracks"
     case featuredPlaylists = "Featured Playlists"
+    case taylorPlaylists = "Taylor Swift"
     case playlistThisIsX = "This Is..."
     case playlistRewind90s = "Rewind to the 90s"
     case playlistRewind80s = "Rewind the 80s"
@@ -71,8 +72,8 @@ class HomeViewModel: ObservableObject {
   func fetchHomeData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
 
-    if mainVM.authKey != nil {
-      let accessToken = mainVM.authKey!.accessToken
+    if mainVM.accessToken != nil {
+      let accessToken = mainVM.accessToken!
 
       fetchDataFor(.smallSongCards, with: accessToken)
       fetchDataFor(.newReleases, with: accessToken)
@@ -80,6 +81,7 @@ class HomeViewModel: ObservableObject {
       fetchDataFor(.recentlyPlayed, with: accessToken)
       fetchDataFor(.userFavoriteTracks, with: accessToken)
       fetchDataFor(.userFavoriteArtists, with: accessToken)
+      fetchDataFor(.taylorPlaylists, with: accessToken)
       fetchDataFor(.featuredPlaylists, with: accessToken)
       fetchDataFor(.playlistThisIsX, with: accessToken)
       fetchDataFor(.artistTopTracks, with: accessToken)
@@ -114,7 +116,7 @@ class HomeViewModel: ObservableObject {
           if tracks.isEmpty {
             // If userFavoriteTracks returns empty, fetch tracks from Spotify's today top hits playlist.
             // Otherwise, the home screen UI won't look good.
-            let todayHitsPlaylistID = "37i9dQZF1DXcBWIGoYBM5M"
+            let todayHitsPlaylistID = "3Ry9OPMpK13YtGYSX2r14U"
             api.getTrack(using: .tracksFromPlaylist(playlistID: todayHitsPlaylistID), with: accessToken) { topTracks in
               trimAndCommunicateResult(section: section, medias: topTracks)
               setImageColorModelBasedOn(topTracks[0].imageURL)
@@ -167,6 +169,12 @@ class HomeViewModel: ObservableObject {
           trimAndCommunicateResult(section: section, medias: playlists)
         }
 
+      case .taylorPlaylists:
+        let keyWord = "Taylor Swift"
+        api.getPlaylist(using: .playlistWithKeyword(keyWord: keyWord), with: accessToken,
+                        limit: numberOfItemsInEachLoad, offset: currentNumberOfLoadedItems) { playlists in
+          trimAndCommunicateResult(section: section, medias: playlists, loadMoreEnabled: true)
+        }
       // MARK: Playlist This is X
       case .playlistThisIsX:
         let keyWord = "this is"
@@ -298,7 +306,7 @@ class HomeViewModel: ObservableObject {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       mediaDetailVM.cleanAll()
       mediaDetailVM.mainItem = data
-      mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
+      mediaDetailVM.accessToken = self.mainVM.accessToken!
       mediaDetailVM.setImageColorModelBasedOn(data.imageURL)
       self.currentSubPage = subPage
     }

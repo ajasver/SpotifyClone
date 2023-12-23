@@ -59,8 +59,8 @@ class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
   func fetchMyLibraryData() {
     for dictKey in isLoading.keys { isLoading[dictKey] = true }
 
-    if mainVM.authKey != nil {
-      let accessToken = mainVM.authKey!.accessToken
+    if mainVM.accessToken != nil {
+      let accessToken = mainVM.accessToken!
 
       getCurrentUserPlaylists(accessToken: accessToken)
       getCurrentUserArtists(accessToken: accessToken)
@@ -149,7 +149,7 @@ class MyLibraryViewModel: ObservableObject & FilterableViewModelProtocol {
     DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
       mediaDetailVM.cleanAll()
       mediaDetailVM.mainItem = data
-      mediaDetailVM.accessToken = self.mainVM.authKey!.accessToken
+      mediaDetailVM.accessToken = self.mainVM.accessToken!
       mediaDetailVM.setImageColorModelBasedOn(data.imageURL)
       self.currentSubPage = subPage
     }

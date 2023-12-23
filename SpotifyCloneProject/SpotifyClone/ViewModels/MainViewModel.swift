@@ -10,7 +10,6 @@ import Foundation
 class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate, ObservableObject {
 
   private var api = MainViewModelAPICalls()
-  @Published private(set) var authKey: AuthKey?
   @Published var currentPage: Page = .home
   @Published var currentPageWasRetapped = false
   @Published private(set) var homeScreenIsReady = false
@@ -19,20 +18,19 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDele
   @Published var state: SpotifyRemoteState = .disconnected
   @Published var playerState: SPTAppRemotePlayerState?
   @Published var playURI   = ""
+  
 
   static private let kAccessTokenKey = "access-token-key"
   private let redirectUri = YourSensitiveData.clientRedirectURL!
   private let clientIdentifier = YourSensitiveData.clientID
 
-  private var accessToken = UserDefaults.standard.string(forKey: kAccessTokenKey) {
-      didSet {
-          let defaults = UserDefaults.standard
-          defaults.set(accessToken, forKey: MainViewModel.kAccessTokenKey)
-      }
-  }
+  @Published private(set) var accessToken: String?
 
   lazy var appRemote: SPTAppRemote = {
-      let configuration = SPTConfiguration(clientID: self.clientIdentifier, redirectURL: self.redirectUri)
+      let configuration = SPTConfiguration(
+        clientID: self.clientIdentifier,
+        redirectURL: self.redirectUri
+      )
       let appRemote = SPTAppRemote(configuration: configuration, logLevel: .debug)
       appRemote.connectionParameters.accessToken = self.accessToken
       appRemote.delegate = self
@@ -40,11 +38,12 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDele
   }()
 
   func getCurrentUserInfo() {
-    api.getCurrentUserInfo(with: authKey!.accessToken) { [unowned self] userInfo in
+    api.getCurrentUserInfo(with: accessToken!) { [unowned self] userInfo in
       self.currentUserProfileInfo = userInfo
     }
   }
   func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+    homeScreenIsReady = true
         appRemote.playerAPI?.delegate = self
         appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
             if let error = error {
@@ -53,12 +52,15 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDele
             self.playerState = result as? SPTAppRemotePlayerState
         })
         self.state = .connected
-        homeScreenIsReady = true
+
+    print("connected!")
+
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
         self.state = .disconnected
         homeScreenIsReady = false
+      print("disconnected!")
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
@@ -67,6 +69,7 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDele
 
     func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
         print("player state changed")
+      self.playerState = playerState
     }
 
     enum SpotifyRemoteState {

@@ -39,7 +39,7 @@ struct PlayerControllerSection: View {
     .padding(.bottom, isSmallDisplay ? -5 : 0)
     .onDisappear {
       // When this View isn't being shown anymore stop the player
-      audioManager.player.replaceCurrentItem(with: nil)
+      audioManager.remotePlayer.replaceCurrentItem(with: nil)
     }
   }
 

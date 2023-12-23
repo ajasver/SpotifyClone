@@ -15,43 +15,34 @@ struct AuthScreen: View {
   var body: some View {
     GeometryReader { geometry in
       ZStack {
-        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.03303453139, green: 0.03028165377, blue: 0.03578740901, alpha: 1)), Color(#colorLiteral(red: 0.06192958647, green: 0.05548349203, blue: 0.06590141785, alpha: 1))]),
+        LinearGradient(gradient: Gradient(colors: [Color(#colorLiteral(red: 0.9989100099, green: 0.7796276808, blue: 0.7581660151, alpha: 1)), Color(#colorLiteral(red: 0.4884283543, green: 0.7279313803, blue: 0.7800245881, alpha: 1))]),
                        startPoint: .topLeading,
                        endPoint: .bottomTrailing)
-          .ignoresSafeArea()
-        VStack(alignment: .leading) {
-          Image("spotify-full-logo")
-            .resizable()
-            .scaledToFit()
-            .frame(width: geometry.size.width / 3.5)
-            .padding(.vertical, Constants.paddingLarge)
+        .ignoresSafeArea()
+        VStack {
           Spacer()
-          HStack {
-            Text("Tali's Version")
-              .font(.avenir(.black, size: geometry.size.width / 12))
-              .tracking(-1)
-            Spacer()
-          }
-          .frame(maxWidth: .infinity)
-          .padding(.vertical, 20)
-          .padding(.vertical, geometry.size.height / 15)
-
-          VStack {
+          if isShowingAuthWebView {
+            ProgressView()
+              .withSpotifyStyle()
+          } else {
             RoundedButton(text: "Sign in with Spotify") {
+              self.isShowingAuthWebView = true
               mainViewModel.authorize()
-              isShowingAuthWebView = true
-            }
-              .padding(.bottom, 10)
+            }.padding(.horizontal, Constants.paddingLarge)
           }
-          .frame(maxWidth: .infinity)
-          .padding(.vertical, Constants.paddingLarge)
+          Spacer()
         }
-        .padding(.horizontal, Constants.paddingLarge)
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, Constants.paddingLarge)
       }
-      .sheet(isPresented: $isShowingAuthWebView, content: {
-        AuthSheetView(isShowingSheetView: $isShowingAuthWebView)
-      })
+      // .padding(.horizontal, Constants.paddingLarge)
+//    }.onAppear(){
+//      mainViewModel.authorize()
+//      isShowingAuthWebView = true
     }
+    .sheet(isPresented: $isShowingAuthWebView, content: {
+      AuthSheetView(isShowingSheetView: $isShowingAuthWebView)
+    })
   }
 
   fileprivate struct RoundedButton: View {
@@ -80,8 +71,8 @@ struct AuthScreen: View {
         .frame(maxWidth: .infinity)
         .frame(height: 50)
       }
-      .background( isFilled ? Capsule().foregroundColor(.spotifyGreen) : Capsule().foregroundColor(.white.opacity(0)))
-      .background( isStroked ? Capsule().strokeBorder(Color.white) : Capsule().strokeBorder(Color.white.opacity(0)))
+      .background( isFilled ? Capsule().foregroundColor(Color(.spotifyDarkGray)) : Capsule().foregroundColor(.white.opacity(0)))
+      .background( isStroked ? Capsule().strokeBorder(Color.spotifyDarkGray) : Capsule().strokeBorder(Color.white.opacity(0)))
     }
   }
 

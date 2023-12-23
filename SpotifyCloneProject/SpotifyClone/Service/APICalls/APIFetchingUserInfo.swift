@@ -68,7 +68,7 @@ class APIFetchingUserInfo {
           let response = try decoder.decode([Bool].self, from: json.data!)
           completionHandler(response.first!)
         } catch {
-          fatalError("Error decoding response.")
+          fatalError("Error decoding response from \(urlRequest.url).")
         }
       }
   }

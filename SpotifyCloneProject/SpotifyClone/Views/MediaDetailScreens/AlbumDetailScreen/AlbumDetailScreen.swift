@@ -7,6 +7,10 @@
 
 import SwiftUI
 
+
+
+
+
 struct AlbumDetailScreen: View {
   var mediaDetailVM: MediaDetailViewModel
   @State var scrollViewPosition = CGFloat.zero
@@ -17,22 +21,21 @@ struct AlbumDetailScreen: View {
   }
 
   var body: some View {
-    GeometryReader { geometry in
-      ZStack {
-        Color.spotifyDarkGray
-        ReadableScrollView(currentPosition: $scrollViewPosition) {
-          VStack {
-            TopGradient(height: geometry.size.height / 1.8)
-            AlbumDetailContent(scrollViewPosition: $scrollViewPosition)
-              .padding(.top, -geometry.size.height / 1.8)
-              .padding(.bottom, 180)
+    ZStack {
+      TopGradient(height: UIScreen.main.bounds.height).ignoresSafeArea()
+      GeometryReader { geometry in
+        ZStack {
+          ReadableScrollView(currentPosition: $scrollViewPosition) {
+            VStack {
+              AlbumDetailContent(scrollViewPosition: $scrollViewPosition)
+                .padding(.bottom, 180)
+            }
           }
-        }
-        TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
-                        title: mediaDetailVM.mainItem!.title,
-                        backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
-
-      }.ignoresSafeArea()
+          TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
+                          title: mediaDetailVM.mainItem!.title,
+                          backButtonShouldReturnTo: mediaDetailVM.detailScreenOrigin!)
+        }.ignoresSafeArea()
+      }
     }
     .onDisappear {
       mediaDetailVM.cleanSectionFor(sectionMediaType: .album)

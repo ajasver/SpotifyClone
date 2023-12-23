@@ -26,7 +26,7 @@ class APIFetchingAlbums {
 
     switch endPoint {
     case .newReleases:
-      baseUrl = "https://api.spotify.com/v1/browse/new-releases?country=\(country)&limit=\(limit)&offset=\(offset)"
+      baseUrl = "https://api.spotify.com/v1/artists/06HL4z0CvFAxyc27GXpf02/albums"
     case .artistAlbums(let artistID):
       baseUrl = "https://api.spotify.com/v1/artists/\(artistID)/albums"
     }

@@ -77,7 +77,7 @@ class MediaDetailViewModel: ObservableObject {
 
   func getAlbumScreenData() {
     MediaDetailAPICalls.UserInfoAPICalls.getArtistBasicInfo(mediaDetailVM: self)
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.album, mediaDetailVM: self, itemID: self.mainItem!.id)
+//    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.album, mediaDetailVM: self, itemID: self.mainItem!.id)
     MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaDetailVM: self, loadMoreEnabled: true)
   }
 
@@ -86,7 +86,7 @@ class MediaDetailViewModel: ObservableObject {
   }
 
   func getEpisodesScreenData() {
-    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.show, mediaDetailVM: self, itemID: self.mainItem!.id)
+//    MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.show, mediaDetailVM: self, itemID: self.mainItem!.id)
     MediaDetailAPICalls.EpisodeAPICalls.getEpisodeDetails(mediaDetailVM: self)
   }
 

@@ -18,7 +18,7 @@ struct YourEpisodesScrollScreen: View {
         ReadableScrollView(currentPosition: $scrollViewPosition) {
           VStack {
             // 4 is just a ratio that looked visually good
-            TopGradient(height: geometry.size.height / 4, specificColor: yourEpisodesPlaylistCoverColor)
+            TopGradient(height: geometry.size.height / 4)
             YourEpisodesDetailContent(scrollViewPosition: $scrollViewPosition)
               .padding(.top, -geometry.size.height / 4)
               .padding(.bottom, Constants.paddingBottomSection)

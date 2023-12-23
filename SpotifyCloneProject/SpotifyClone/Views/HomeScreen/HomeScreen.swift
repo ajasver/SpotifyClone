@@ -63,13 +63,13 @@ struct HomeScreen: View {
               Group {
                 SmallSongCardsGrid(medias: getTracksFor(.smallSongCards))
                   .padding(.horizontal, Constants.paddingStandard)
-                RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
+//                RecentlyPlayedScrollView(medias: getTracksFor(.recentlyPlayed))
                 BigSongCoversScrollView(section: .newReleases,
                                         showArtistName: true)
-                BigSongCoversScrollView(section: .userFavoriteTracks)
-                BigSongCoversScrollView(section: .topPodcasts)
-                BigSongCoversScrollView(section: .featuredPlaylists,
-                                        sectionTitle: homeVM.mediaCollection[.featuredPlaylists]!.first!.previewURL)
+//                BigSongCoversScrollView(section: .userFavoriteTracks)
+//                BigSongCoversScrollView(section: .topPodcasts)
+                BigSongCoversScrollView(section: .taylorPlaylists,
+                                        sectionTitle: homeVM.mediaCollection[.taylorPlaylists]!.first!.previewURL)
                 RecommendedArtistScrollView(medias: getTracksFor(.artistTopTracks),
                                             sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
                 BigSongCoversScrollView(section: .userFavoriteArtists)

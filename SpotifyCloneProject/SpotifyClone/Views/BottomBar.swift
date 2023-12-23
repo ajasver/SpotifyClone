@@ -22,7 +22,7 @@ struct BottomBar: View {
                                artist: "Ed Sheeran",
                                cover: Image("nothing-but-the-beat-cover"))
         }
-        BottomNavigationBar(mainVM: mainVM)
+//        BottomNavigationBar(mainVM: mainVM)
       }
     }
     // So it doesn't go up when keyboard is open
@@ -67,11 +67,13 @@ private struct BottomMediaPlayerBar: View {
               .padding(.trailing, Constants.paddingStandard)
           }
         }
-        .frame(height: 60)
+        .frame(height: 80)
         .background(Color.spotifyLightGray)
         Rectangle()
           .fill(Color.spotifyDarkGray)
+          .ignoresSafeArea()
           .frame(height: 0.3)
+
       }
     }
   }

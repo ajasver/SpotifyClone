@@ -25,7 +25,7 @@ struct SearchBarSection: View {
       .onTapGesture {
         searchVM.changeSubpageTo(.activeSearching,
                                  subPageType: .search(activeSearchVM: activeSearchVM,
-                                                      accessToken: searchVM.mainVM.authKey!.accessToken))
+                                                      accessToken: searchVM.mainVM.accessToken!))
       }
     }
   }
