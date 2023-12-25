@@ -12,7 +12,7 @@ import Alamofire
 
 struct PlayerControllerSection: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @StateObject var audioManager = RemoteAudio()
+  @EnvironmentObject var audioManager: RemoteAudio
   var isSmallDisplay: Bool = false
 
   private var urlString: String { mediaDetailVM.mainItem!.previewURL }
@@ -23,14 +23,12 @@ struct PlayerControllerSection: View {
         .padding(.bottom, isSmallDisplay ? -5 : 0)
 
       HStack {
-        PlayingRateButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
+        BackwardButton(isSmallDisplay: isSmallDisplay).environmentObject(audioManager)
         Spacer()
-        BackwardButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
-        Spacer()
-        PlayStopButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
+        PlayStopButton( isSmallDisplay: isSmallDisplay).environmentObject(audioManager)
           .fixedSize()
         Spacer()
-        ForwardButton(audioManager: audioManager, isSmallDisplay: isSmallDisplay)
+        ForwardButton( isSmallDisplay: isSmallDisplay).environmentObject(audioManager)
         Spacer()
         HeartButton(mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id, itemType: .track)
           .frame(width: isSmallDisplay ? 20 : 25)
@@ -39,37 +37,37 @@ struct PlayerControllerSection: View {
     .padding(.bottom, isSmallDisplay ? -5 : 0)
     .onDisappear {
       // When this View isn't being shown anymore stop the player
-      audioManager.remotePlayer.replaceCurrentItem(with: nil)
+
     }
   }
 
-  private struct PlayingRateButton: View {
-    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-    @StateObject var audioManager: RemoteAudio
-    var isSmallDisplay: Bool = false
-
-    var body: some View {
-      Button(action: { audioManager.changePlayingRate(audioManager: audioManager) },
-             label: {
-        Rectangle()
-          .fill(Color.clear)
-          .overlay(Text(audioManager.currentRateString)
-                    .font(.avenir(.medium, size: isSmallDisplay ? 15 : 18))
-                    .fixedSize())
-          .frame(width: isSmallDisplay ? 20 : 25)
-      })
-      .buttonStyle(PlainButtonStyle())
-      .disabled(audioManager.state != .active)
-    }
-  }
+//  private struct PlayingRateButton: View {
+//    @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+//    @EnvironmentObject var audioManager: RemoteAudio
+//    var isSmallDisplay: Bool = false
+//
+//    var body: some View {
+//      Button(action: { audioManager.changePlayingRate(audioManager: audioManager) },
+//             label: {
+//        Rectangle()
+//          .fill(Color.clear)
+//          .overlay(Text(audioManager.currentRateString)
+//                    .font(.avenir(.medium, size: isSmallDisplay ? 15 : 18))
+//                    .fixedSize())
+//          .frame(width: isSmallDisplay ? 20 : 25)
+//      })
+//      .buttonStyle(PlainButtonStyle())
+//      .disabled(audioManager.state != .active)
+//    }
+//  }
 
   private struct ForwardButton: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-    @StateObject var audioManager: RemoteAudio
+    @EnvironmentObject var audioManager: RemoteAudio
     var isSmallDisplay: Bool = false
 
     var body: some View {
-      Button(action: { audioManager.forwardFiveSeconds() },
+      Button(action: { audioManager.skipNext() },
              label: {
         Image("next")
           .resizeToFit()
@@ -82,11 +80,11 @@ struct PlayerControllerSection: View {
 
   private struct BackwardButton: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-    @StateObject var audioManager: RemoteAudio
+    @EnvironmentObject var audioManager: RemoteAudio
     var isSmallDisplay: Bool = false
 
     var body: some View {
-      Button(action: { audioManager.backwardFiveSeconds() },
+      Button(action: { audioManager.skipPrevious() },
              label: {
         Image("previous")
           .resizeToFit()
@@ -99,7 +97,7 @@ struct PlayerControllerSection: View {
 
   private struct PlayStopButton: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-    @StateObject var audioManager: RemoteAudio
+    @EnvironmentObject var audioManager: RemoteAudio
     var isSmallDisplay: Bool = false
 
     var body: some View {
@@ -110,7 +108,7 @@ struct PlayerControllerSection: View {
           if mediaDetailVM.mainItem!.previewURL.isEmpty {
             audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
           } else {
-            audioManager.play(mediaDetailVM.mainItem!.previewURL, audioID: mediaDetailVM.mainItem!.id)
+            audioManager.play(mediaDetailVM.mainItem!.id, audioID: mediaDetailVM.mainItem!.id)
           }
         }
       } label: {

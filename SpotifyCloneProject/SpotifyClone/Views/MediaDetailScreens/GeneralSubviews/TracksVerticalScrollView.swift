@@ -9,7 +9,7 @@ import SwiftUI
 
 struct TracksVerticalScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @StateObject var audioManager = RemoteAudio()
+  @EnvironmentObject var audioManager: RemoteAudio
   var tracksOrigin: MediaDetailSection
   private var medias: [SpotifyModel.MediaItem] {
     switch tracksOrigin {
@@ -27,14 +27,14 @@ struct TracksVerticalScrollView: View {
       ForEach(medias) { media in
         switch tracksOrigin {
         case .album:
-          AlbumItem(audioManager: audioManager, media: media)
+          AlbumItem( media: media).environmentObject(audioManager)
             .onAppear {
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
                 MediaDetailAPICalls.AlbumAPICalls.getTracksFromAlbum(mediaDetailVM: mediaDetailVM, loadMoreEnabled: true)
               }
             }
         case .playlist:
-          PlaylistItem(audioManager: audioManager, media: media)
+          PlaylistItem( media: media).environmentObject(audioManager)
             .onAppear {
               if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
                 MediaDetailAPICalls.PlaylistAPICalls.getTracksFromPlaylist(mediaDetailVM: mediaDetailVM, loadMoreEnabled: true)
@@ -56,15 +56,15 @@ struct TracksVerticalScrollView: View {
 
   fileprivate struct AlbumItem: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-    @StateObject var audioManager: RemoteAudio
+    @EnvironmentObject var audioManager: RemoteAudio
     let media: SpotifyModel.MediaItem
     private var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
 
     var body: some View {
       HStack(spacing: Constants.spacingSmall) {
-        PlayStopButton(audioManager: audioManager,
+        PlayStopButton(
                        media: media,
-                       size: 60)
+                       size: 60).environmentObject(audioManager)
         VStack(alignment: .leading, spacing: 0) {
           Text(media.title)
             .font(.avenir(.medium, size: Constants.fontMedium))
@@ -93,7 +93,7 @@ struct TracksVerticalScrollView: View {
 
   fileprivate struct PlaylistItem: View {
     @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-    @StateObject var audioManager: RemoteAudio
+    @EnvironmentObject var audioManager: RemoteAudio
     let media: SpotifyModel.MediaItem
 
     @State var isTapped = false
@@ -121,9 +121,8 @@ struct TracksVerticalScrollView: View {
             Rectangle()
               .foregroundColor(.spotifyMediumGray)
               .overlay(RemoteImage(urlString: lowestResImageURL))
-            PlayStopButton(audioManager: audioManager,
-                           media: media,
-                           size: 60)
+            PlayStopButton(media: media,
+                           size: 60).environmentObject(audioManager)
                 .opacity(isTapped ? 1 : 0)
           }
           .frame(width: 60, height: 60)

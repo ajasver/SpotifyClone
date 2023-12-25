@@ -9,6 +9,7 @@ import SwiftUI
 
 struct YourEpisodesScrollScreen: View {
   @EnvironmentObject var myLibraryVM: MyLibraryViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
   @State var scrollViewPosition = CGFloat.zero
   let yourEpisodesPlaylistCoverColor = Color(UIColor(red: 0.396, green: 0.824, blue: 0.427, alpha: 1))
 
@@ -19,7 +20,7 @@ struct YourEpisodesScrollScreen: View {
           VStack {
             // 4 is just a ratio that looked visually good
             TopGradient(height: geometry.size.height / 4)
-            YourEpisodesDetailContent(scrollViewPosition: $scrollViewPosition)
+            YourEpisodesDetailContent(scrollViewPosition: $scrollViewPosition).environmentObject(audioManager)
               .padding(.top, -geometry.size.height / 4)
               .padding(.bottom, Constants.paddingBottomSection)
           }
@@ -37,7 +38,9 @@ struct YourEpisodesScrollScreen: View {
 struct YourEpisodesDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @StateObject var audioManager = RemoteAudio()
+
+  @EnvironmentObject var audioManager: RemoteAudio
+
   @Binding var scrollViewPosition: CGFloat
   var medias: [SpotifyModel.MediaItem] { mediaDetailVM.mediaCollection[.userLikedFollowedMedia(.userSavedEpisodes)]! }
 
@@ -61,7 +64,7 @@ struct YourEpisodesDetailContent: View {
           ForEach(medias) { media in
             Group {
               let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
-              EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
+              EpisodeItem( media: media, details: episodeDetails).environmentObject(audioManager)
                 .onAppear {
                   MediaDetailAPICalls.UserInfoAPICalls.checksIfUserFollows(.episode,
                                                                            mediaDetailVM: mediaDetailVM,

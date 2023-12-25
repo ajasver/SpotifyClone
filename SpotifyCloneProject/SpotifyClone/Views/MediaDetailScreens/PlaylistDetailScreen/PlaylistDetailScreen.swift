@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PlaylistDetailScreen: View {
   var mediaDetailVM: MediaDetailViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
   @State var scrollViewPosition = CGFloat.zero
 
   init(detailScreenOrigin: MediaDetailViewModel.DetailScreenOrigin, mediaDetailVM: MediaDetailViewModel) {
@@ -26,7 +27,7 @@ struct PlaylistDetailScreen: View {
             TopGradient(height: geometry.size.height / 1.8)
             PlaylistDetailContent(scrollViewPosition: $scrollViewPosition)
               .padding(.top, -geometry.size.height / 1.8)
-              .padding(.bottom, Constants.paddingBottomSection)
+              .padding(.bottom, Constants.paddingBottomSection).environmentObject(audioManager)
           }
         }
         TopBarWithTitle(scrollViewPosition: $scrollViewPosition,
@@ -45,6 +46,7 @@ struct PlaylistDetailScreen: View {
 
 private struct PlaylistDetailContent: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
   @Binding var scrollViewPosition: CGFloat
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
 
@@ -79,7 +81,8 @@ private struct PlaylistDetailContent: View {
       .frame(height: 65)
 
       if Utility.didEverySectionLoaded(in: .playlistDetail, mediaDetailVM: mediaDetailVM) {
-        TracksVerticalScrollView(tracksOrigin: .playlist(.tracksFromPlaylist))
+        TracksVerticalScrollView( tracksOrigin: .playlist(.tracksFromPlaylist))
+          .environmentObject(audioManager)
       } else {
         HStack {
           ProgressView()

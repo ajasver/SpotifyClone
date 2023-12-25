@@ -37,6 +37,7 @@ struct LikedSongsScrollScreen: View {
 struct LikedSongsDetailContent: View {
   @Environment(\.topSafeAreaSize) var topSafeAreaSize
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
   @Binding var scrollViewPosition: CGFloat
 
   var body: some View {
@@ -55,7 +56,7 @@ struct LikedSongsDetailContent: View {
             .opacity(Constants.opacityStandard)
         }
 
-        TracksPreviewVerticalScrollView()
+        TracksPreviewVerticalScrollView().environmentObject(audioManager)
       } else {
         HStack {
           ProgressView()
@@ -79,13 +80,14 @@ struct LikedSongsDetailContent: View {
 
 struct TracksPreviewVerticalScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @StateObject var audioManager = RemoteAudio()
+  @EnvironmentObject var mainVM: MainViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
   var medias: [SpotifyModel.MediaItem] { mediaDetailVM.mediaCollection[.userLikedFollowedMedia(.userLikedSongs)]! }
 
   var body: some View {
     LazyVStack {
       ForEach(medias) { media in
-        TrackPreviewItem(media: media, audioManager: audioManager)
+        TrackPreviewItem(media: media)
           .padding(.bottom, Constants.paddingSmall)
           .onAppear {
             if mediaDetailVM.shouldFetchMoreData(basedOn: media, inRelationTo: medias) {
@@ -101,7 +103,8 @@ struct TracksPreviewVerticalScrollView: View {
 
 struct TrackPreviewItem: View {
   let media: SpotifyModel.MediaItem
-  @StateObject var audioManager: RemoteAudio
+  @EnvironmentObject var mainVM: MainViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
 
   var body: some View {
     HStack(spacing: Constants.spacingSmall) {
@@ -113,7 +116,7 @@ struct TrackPreviewItem: View {
             .foregroundColor(.spotifyMediumGray)
             .overlay(ZStack {
               RemoteImage(urlString: media.imageURL).aspectRatio(1/1, contentMode: .fill)
-              PlayStopButton(audioManager: audioManager, media: media, size: 80)
+              PlayStopButton( media: media, size: 80).environmentObject(audioManager)
             })
             .frame(width: 80, height: 80)
             .mask(Rectangle().frame(width: 80, height: 80))

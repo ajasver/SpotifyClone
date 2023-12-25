@@ -10,6 +10,7 @@ import SwiftUI
 struct HomeScreen: View {
   @EnvironmentObject var homeVM: HomeViewModel
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
 
   var body: some View {
     switch homeVM.currentSubPage {
@@ -22,22 +23,22 @@ struct HomeScreen: View {
 
     case .playlistDetail:
       PlaylistDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
-                           mediaDetailVM: mediaDetailVM)
+                           mediaDetailVM: mediaDetailVM).environmentObject(audioManager)
     case .trackDetail:
       TrackDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
-                        mediaDetailVM: mediaDetailVM)
+                        mediaDetailVM: mediaDetailVM).environmentObject(audioManager)
     case .albumDetail:
       AlbumDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
-                        mediaDetailVM: mediaDetailVM)
+                        mediaDetailVM: mediaDetailVM).environmentObject(audioManager)
     case .showDetail:
       ShowsDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
-                        mediaDetailVM: mediaDetailVM)
+                        mediaDetailVM: mediaDetailVM).environmentObject(audioManager)
     case .artistDetail:
       ArtistDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
-                         mediaDetailVM: mediaDetailVM)
+                         mediaDetailVM: mediaDetailVM).environmentObject(audioManager)
     case .episodeDetail:
       EpisodeDetailScreen(detailScreenOrigin: .home(homeVM: homeVM),
-                          mediaDetailVM: mediaDetailVM)
+                          mediaDetailVM: mediaDetailVM).environmentObject(audioManager)
     }
   }
 

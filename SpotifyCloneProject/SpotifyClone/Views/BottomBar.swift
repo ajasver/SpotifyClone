@@ -11,6 +11,7 @@ import SwiftUI
 
 struct BottomBar: View {
   @StateObject var mainVM: MainViewModel
+  @EnvironmentObject var audioManager: RemoteAudio
   var showMediaPlayer = false
 
   var body: some View {
@@ -18,9 +19,9 @@ struct BottomBar: View {
       Spacer()
       Group {
         if showMediaPlayer {
-          BottomMediaPlayerBar(songName: "Nothing But The Beat",
-                               artist: "Ed Sheeran",
-                               cover: Image("nothing-but-the-beat-cover"))
+          BottomMediaPlayerBar(songName: mainVM.currentTrackName,
+                               artist: mainVM.currentTrackArtist,
+                               cover: Image("nothing-but-the-beat-cover")).environmentObject(audioManager)
         }
 //        BottomNavigationBar(mainVM: mainVM)
       }
@@ -34,6 +35,7 @@ private struct BottomMediaPlayerBar: View {
   var songName: String
   var artist: String
   var cover: Image
+  @EnvironmentObject var audioManager: RemoteAudio
 
   var body: some View {
     ZStack {
@@ -61,10 +63,8 @@ private struct BottomMediaPlayerBar: View {
               .resizeToFit()
               .frame(width: 25, height: 25)
               .opacity(Constants.opacityStandard)
-            Image("play")
-              .resizeToFit()
-              .frame(width: 25, height: 25)
-              .padding(.trailing, Constants.paddingStandard)
+            PlayStopButton(isSmallDisplay: true).environmentObject(audioManager)
+              .fixedSize()
           }
         }
         .frame(height: 80)

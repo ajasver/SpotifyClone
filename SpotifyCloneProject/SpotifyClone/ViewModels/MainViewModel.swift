@@ -7,7 +7,7 @@
 
 import Foundation
 
-class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDelegate, ObservableObject {
+class MainViewModel: NSObject, SPTAppRemoteDelegate, ObservableObject {
 
   private var api = MainViewModelAPICalls()
   @Published var currentPage: Page = .home
@@ -18,7 +18,10 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDele
   @Published var state: SpotifyRemoteState = .disconnected
   @Published var playerState: SPTAppRemotePlayerState?
   @Published var playURI   = ""
-  
+  @Published var currentTrackName = ""
+  @Published var currentTrackArtist = ""
+  @Published var currentTrackImage: UIImage?
+  @Published var audioManager: RemoteAudio? = nil
 
   static private let kAccessTokenKey = "access-token-key"
   private let redirectUri = YourSensitiveData.clientRedirectURL!
@@ -43,33 +46,22 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, SPTAppRemotePlayerStateDele
     }
   }
   func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
+    self.audioManager = RemoteAudio(mainVM: self)
+    self.audioManager!.appRemoteConnected()
     homeScreenIsReady = true
-        appRemote.playerAPI?.delegate = self
-        appRemote.playerAPI?.subscribe(toPlayerState: { (result, error) in
-            if let error = error {
-                debugPrint(error.localizedDescription)
-            }
-            self.playerState = result as? SPTAppRemotePlayerState
-        })
-        self.state = .connected
-
     print("connected!")
 
     }
 
-    func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
+  func appRemote(_ appRemote: SPTAppRemote, didDisconnectWithError error: Error?) {
         self.state = .disconnected
+    self.audioManager!.appRemoteDisconnect()
         homeScreenIsReady = false
       print("disconnected!")
     }
 
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
         self.state = .failed
-    }
-
-    func playerStateDidChange(_ playerState: SPTAppRemotePlayerState) {
-        print("player state changed")
-      self.playerState = playerState
     }
 
     enum SpotifyRemoteState {

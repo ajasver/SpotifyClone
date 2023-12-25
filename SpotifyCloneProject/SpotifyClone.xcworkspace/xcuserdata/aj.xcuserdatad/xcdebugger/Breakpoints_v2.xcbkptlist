@@ -14,9 +14,9 @@
             filePath = "SpotifyClone/ViewModels/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "appRemoteDidEstablishConnection(_:)"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "appRemote(_:didDisconnectWithError:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -97,54 +97,6 @@
             endingLineNumber = "36"
             landmarkName = "body"
             landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "547726A3-FCDE-4817-A443-C028F92EAC54"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpotifyClone/ViewModels/MainViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "MainViewModel"
-            landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "547726A3-FCDE-4817-A443-C028F92EAC54 - becdc6158cb1c2e1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SpotifyClone.MainViewModel.appRemote(_: __C.SPTAppRemote, didDisconnectWithError: Swift.Optional&lt;Swift.Error&gt;) -&gt; ()"
-                  moduleName = "SpotifyClone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aj/dev/TalisVersion/SpotifyCloneProject/SpotifyClone/ViewModels/MainViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "48">
-               </Location>
-               <Location
-                  uuid = "547726A3-FCDE-4817-A443-C028F92EAC54 - c6335dc1fb6c8f22"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "SpotifyClone.MainViewModel.appRemote(_: __C.SPTAppRemote, didFailConnectionAttemptWithError: Swift.Optional&lt;Swift.Error&gt;) -&gt; ()"
-                  moduleName = "SpotifyClone"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/aj/dev/TalisVersion/SpotifyCloneProject/SpotifyClone/ViewModels/MainViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "69"
-                  endingLineNumber = "69"
-                  offsetFromSymbolStart = "40">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -239,8 +191,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
             endingLineNumber = "55"
-            landmarkName = "appRemoteDidEstablishConnection(_:)"
-            landmarkType = "7">
+            landmarkName = "MainViewModel"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "D45E553A-A88C-4C26-891C-0C2EFC07A4C0 - 4ee959918bb9adf"
@@ -285,9 +237,9 @@
             filePath = "SpotifyClone/ViewModels/MainViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "appRemote(_:didDisconnectWithError:)"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "appRemote(_:didFailConnectionAttemptWithError:)"
             landmarkType = "7">
             <Locations>
                <Location
@@ -447,8 +399,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "getCurrentUserInfo()"
-            landmarkType = "7">
+            landmarkName = "MainViewModel"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -529,6 +481,22 @@
             endingLineNumber = "61"
             landmarkName = "checksIfUserFollows(_:with:mediaID:completionHandler:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E25AA652-2C52-490E-A3F9-231D56AE089C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SpotifyClone/Views/MediaDetailScreens/TrackDetailScreen/TrackDetailViews/TrackDetailViews/PlayerControllerSection.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

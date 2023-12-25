@@ -36,6 +36,7 @@ struct MainView: View {
           HomeScreen()
             .environmentObject(homeVM)
             .environmentObject(mediaDetailVM)
+            .environmentObject(mainVM.audioManager!)
         case .search:
           SearchScreen()
             .environmentObject(searchVM)
@@ -46,7 +47,7 @@ struct MainView: View {
             .environmentObject(myLibraryVM)
             .environmentObject(mediaDetailVM)
         }
-        BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer)
+        BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer).environmentObject(mainVM.audioManager!)
       }
       .onAppear { mainVM.getCurrentUserInfo() }
       .onChange(of: mainVM.currentPage) { _ in cleanAllPages() }

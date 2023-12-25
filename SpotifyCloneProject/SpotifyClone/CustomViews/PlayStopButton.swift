@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PlayStopButton: View {
-  @StateObject var audioManager: RemoteAudio
+  @EnvironmentObject var audioManager: RemoteAudio
   var media: SpotifyModel.MediaItem
   var size: CGFloat
 
@@ -45,7 +45,7 @@ struct PlayStopButton: View {
                   audioManager.playWithItunes(forItem: media, canPlayMoreThanOneAudio: true)
                 } else {
                   audioManager.pause()
-                  audioManager.play(media.previewURL, audioID: media.id)
+                  audioManager.play(media.id, audioID: media.id)
                 }
               }
           }

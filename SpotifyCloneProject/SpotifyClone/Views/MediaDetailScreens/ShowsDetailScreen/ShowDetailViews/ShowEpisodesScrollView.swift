@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ShowEpisodesScrollView: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @StateObject var audioManager = RemoteAudio()
+  @EnvironmentObject var audioManager: RemoteAudio
   // This is not the cache. It's just a helper variable to keep track of what and when should the cache be cleaned.
   @State var currentCachedURLs = [String]()
 
@@ -22,7 +22,7 @@ struct ShowEpisodesScrollView: View {
       ForEach(medias) { media in
         Group {
           let episodeDetails = SpotifyModel.getEpisodeDetails(for: media)
-          EpisodeItem(audioManager: audioManager, media: media, details: episodeDetails)
+          EpisodeItem(media: media, details: episodeDetails).environmentObject(audioManager)
             .onAppear {
 
               // TODO: Find a way to do it without performance issues
@@ -56,7 +56,7 @@ struct ShowEpisodesScrollView: View {
 // MARK: - Episode Item
 struct EpisodeItem: View {
   @EnvironmentObject var mediaDetailVM: MediaDetailViewModel
-  @StateObject var audioManager: RemoteAudio
+  @EnvironmentObject var audioManager: RemoteAudio
   let media: SpotifyModel.MediaItem
   let details: SpotifyModel.EpisodeDetails
 
