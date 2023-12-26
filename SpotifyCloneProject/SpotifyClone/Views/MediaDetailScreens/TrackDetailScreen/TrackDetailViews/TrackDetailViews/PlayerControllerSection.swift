@@ -21,8 +21,8 @@ struct PlayerControllerSection: View {
     VStack {
       audioManager.buildSliderForAudio()
         .padding(.bottom, isSmallDisplay ? -5 : 0)
-
       HStack {
+        Spacer()
         BackwardButton(isSmallDisplay: isSmallDisplay).environmentObject(audioManager)
         Spacer()
         PlayStopButton( isSmallDisplay: isSmallDisplay).environmentObject(audioManager)
@@ -32,6 +32,7 @@ struct PlayerControllerSection: View {
         Spacer()
         HeartButton(mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id, itemType: .track)
           .frame(width: isSmallDisplay ? 20 : 25)
+        Spacer()
       }
     }
     .padding(.bottom, isSmallDisplay ? -5 : 0)
@@ -108,8 +109,21 @@ struct PlayerControllerSection: View {
           if mediaDetailVM.mainItem!.previewURL.isEmpty {
             audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
           } else {
-            audioManager.play(mediaDetailVM.mainItem!.id, audioID: mediaDetailVM.mainItem!.id)
-          }
+            var uri = mediaDetailVM.mainItem!.previewURL
+            switch mediaDetailVM.mainItem!.mediaType {
+            case .track:
+              uri = "spotify:track:\(mediaDetailVM.mainItem!.id)"
+            case .episode:
+              uri = "spotify:episode:\(mediaDetailVM.mainItem!.id)"
+            case .show:
+              uri = "spotify:show:\(mediaDetailVM.mainItem!.id)"
+            case .album:
+              uri = "spotify:album:\(mediaDetailVM.mainItem!.id)"
+            default:
+              uri = mediaDetailVM.mainItem!.id
+            }
+            audioManager.play(uri, audioID: uri)
+             }
         }
       } label: {
         ZStack {

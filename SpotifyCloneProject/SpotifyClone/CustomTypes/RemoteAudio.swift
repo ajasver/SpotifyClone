@@ -84,27 +84,44 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
   func updateCurrentPlayingTrack(playerState: SPTAppRemotePlayerState) {
     let track = playerState.track
     if track.uri != lastItemPlayedID {
-        mainVM.currentTrackArtist = track.artist.name
-        mainVM.currentTrackName = track.name
+        let currentTrackArtist = track.artist.name
+        let currentTrackName = track.name
         appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize(width: 60, height: 60), callback: { (image, error) in
             if let error = error {
                 print("Failed to fetch image: \(error)")
             } else if let image = image as? UIImage {
-              self.mainVM.currentTrackImage = image
+              self.mainVM.currentTrack = SpotifyModel.MediaItem(
+                title: track.name,
+                previewURL: currentTrackName,
+                imageURL: "",
+                lowResImageURL: "",
+                authorName: [currentTrackArtist],
+                author: nil,
+                mediaType: .track,
+                id: track.uri,
+                details: .tracks(trackDetails: SpotifyModel.TrackDetails(
+                  popularity: 0,
+                  explicit: false,
+                  durationInMs: Double(track.duration),
+                  id: track.uri))
+              )
             }
-        })
+    })
+    }
 
   }
-  }
+
 
   func play(_ audioURL: String, audioID: String) {
-    if !showPauseButton && lastPlayedURL != audioURL {
+    if lastPlayedURL != audioURL {
+      print("play!")
       appRemote.playerAPI?.play(audioURL, callback: defaultCallback)
+    } else {
+      appRemote.playerAPI?.resume()
     }
     lastItemPlayedID = audioURL
     lastPlayedURL = audioURL
-    showPauseButton = true
-  }
+    showPauseButton = true}
 
   func pause() {
     appRemote.playerAPI?.pause(defaultCallback)
@@ -157,7 +174,7 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
   }
 
   func stopObservingForBufferingState() {
-    bufferingCheckerTimer!.upstream.connect().cancel()
+    bufferingCheckerTimer?.upstream.connect().cancel()
   }
 
   private func changeCurrentTime(by time: Double) {

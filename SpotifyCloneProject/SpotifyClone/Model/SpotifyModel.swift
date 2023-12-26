@@ -44,6 +44,7 @@ struct SpotifyModel {
     var mediaType: MediaTypes
     var id: String
     var details: DetailTypes
+    var Image: UIImage?
 
     fileprivate func getDetails() -> DetailTypes {
       switch details {

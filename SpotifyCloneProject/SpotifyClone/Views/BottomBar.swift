@@ -17,14 +17,11 @@ struct BottomBar: View {
   var body: some View {
     VStack(spacing: 0) {
       Spacer()
-      Group {
-        if showMediaPlayer {
-          BottomMediaPlayerBar(songName: mainVM.currentTrackName,
-                               artist: mainVM.currentTrackArtist,
-                               cover: Image("nothing-but-the-beat-cover")).environmentObject(audioManager)
-        }
-//        BottomNavigationBar(mainVM: mainVM)
+      if let currentTrack = mainVM.currentTrack {
+        BottomMediaPlayerBar(media: currentTrack).environmentObject(audioManager)
       }
+//        BottomNavigationBar(mainVM: mainVM)
+      
     }
     // So it doesn't go up when keyboard is open
     .ignoresSafeArea(.keyboard, edges: .bottom)
@@ -32,12 +29,19 @@ struct BottomBar: View {
 }
 
 private struct BottomMediaPlayerBar: View {
-  var songName: String
-  var artist: String
-  var cover: Image
+  var media: SpotifyModel.MediaItem
+  private var lowestResImageURL: String {
+      if media.lowResImageURL != "" {
+        return media.lowResImageURL ?? ""
+      } else {
+        return media.imageURL
+      }
+    }
+  private var songName: String { media.title }
   @EnvironmentObject var audioManager: RemoteAudio
 
   var body: some View {
+    let cover =
     ZStack {
       VStack(spacing: 0) {
         Rectangle()
@@ -45,13 +49,14 @@ private struct BottomMediaPlayerBar: View {
           .frame(height: 3)
         HStack {
           HStack {
-            cover
-              .resizeToFit()
+            Rectangle()
+              .foregroundColor(.spotifyMediumGray)
+              .overlay(RemoteImage(urlString: lowestResImageURL))
               .frame(width: 60)
             VStack(alignment: .leading) {
               Text(songName).font(.avenir(.medium, size: Constants.fontSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-              Text(artist).font(.avenir(.medium, size: Constants.fontXSmall))
+              Text(media.authorName.joined(separator: ", ")).font(.avenir(.medium, size: Constants.fontXSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .opacity(Constants.opacityStandard)
             }
@@ -63,7 +68,7 @@ private struct BottomMediaPlayerBar: View {
               .resizeToFit()
               .frame(width: 25, height: 25)
               .opacity(Constants.opacityStandard)
-            PlayStopButton(isSmallDisplay: true).environmentObject(audioManager)
+            PlayStopButton(media: media, size: 60).environmentObject(audioManager)
               .fixedSize()
           }
         }

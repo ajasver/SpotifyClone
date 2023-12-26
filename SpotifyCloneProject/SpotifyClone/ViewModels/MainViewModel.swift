@@ -18,9 +18,7 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, ObservableObject {
   @Published var state: SpotifyRemoteState = .disconnected
   @Published var playerState: SPTAppRemotePlayerState?
   @Published var playURI   = ""
-  @Published var currentTrackName = ""
-  @Published var currentTrackArtist = ""
-  @Published var currentTrackImage: UIImage?
+  @Published var currentTrack: SpotifyModel.MediaItem?
   @Published var audioManager: RemoteAudio? = nil
 
   static private let kAccessTokenKey = "access-token-key"

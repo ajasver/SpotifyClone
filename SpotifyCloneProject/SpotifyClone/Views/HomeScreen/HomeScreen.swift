@@ -75,14 +75,14 @@ struct HomeScreen: View {
                                             sectionTitle: HomeViewModel.Section.artistTopTracks.rawValue)
                 BigSongCoversScrollView(section: .userFavoriteArtists)
               }
-              Group {
-                BigSongCoversScrollView(section: .playlistRewind2010s)
-                BigSongCoversScrollView(section: .playlistRewind2000s)
-                BigSongCoversScrollView(section: .playlistRewind90s)
-                BigSongCoversScrollView(section: .playlistRewind80s)
-                BigSongCoversScrollView(section: .playlistRewind70s)
-                BigSongCoversScrollView(section: .playlistThisIsX)
-              }
+              // Group {
+              //   BigSongCoversScrollView(section: .playlistRewind2010s)
+              //   BigSongCoversScrollView(section: .playlistRewind2000s)
+              //   BigSongCoversScrollView(section: .playlistRewind90s)
+              //   BigSongCoversScrollView(section: .playlistRewind80s)
+              //   BigSongCoversScrollView(section: .playlistRewind70s)
+              //   BigSongCoversScrollView(section: .playlistThisIsX)
+              // }
             }
             .padding(.vertical, Constants.paddingStandard)
             .padding(.bottom, Constants.paddingBottomSection)
