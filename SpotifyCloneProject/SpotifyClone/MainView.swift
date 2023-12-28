@@ -47,7 +47,9 @@ struct MainView: View {
             .environmentObject(myLibraryVM)
             .environmentObject(mediaDetailVM)
         }
-        BottomBar(mainVM: mainVM, showMediaPlayer: mainVM.showBottomMediaPlayer).environmentObject(mainVM.audioManager!)
+        if let _ = mainVM.currentTrack {
+          BottomBar(mainVM: mainVM).environmentObject(mainVM.audioManager!)
+        }
       }
       .onAppear { mainVM.getCurrentUserInfo() }
       .onChange(of: mainVM.currentPage) { _ in cleanAllPages() }

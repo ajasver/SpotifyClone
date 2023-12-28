@@ -62,7 +62,7 @@ struct EpisodeItem: View {
 
   var releaseDate: String { Utility.getSpelledOutDate(from: details.releaseDate) }
   var duration: String { Utility.formatTimeToHourMinSec(for: .milliseconds(details.durationInMs), spelledOut: true) }
-  var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
+  var isPlaying: Bool { audioManager.isPlaying && audioManager.lastItemPlayedID == media.id }
 
   var followingState: MediaDetailViewModel.CurrentFollowingState {
     guard mediaDetailVM.followedIDs[media.id] != nil else { return .isNotFollowing }

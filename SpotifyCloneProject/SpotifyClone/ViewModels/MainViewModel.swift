@@ -46,6 +46,7 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, ObservableObject {
   func appRemoteDidEstablishConnection(_ appRemote: SPTAppRemote) {
     self.audioManager = RemoteAudio(mainVM: self)
     self.audioManager!.appRemoteConnected()
+    self.audioManager!.pause()
     homeScreenIsReady = true
     print("connected!")
 
@@ -60,6 +61,8 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, ObservableObject {
 
     func appRemote(_ appRemote: SPTAppRemote, didFailConnectionAttemptWithError error: Error?) {
         self.state = .failed
+        homeScreenIsReady = false
+      print("failed!")
     }
 
     enum SpotifyRemoteState {
@@ -68,10 +71,12 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, ObservableObject {
         case failed
     }
 
-  func connect() {
-    if let _ = appRemote.connectionParameters.accessToken {
-        appRemote.connect()
-    }
+  func authorize() {
+    appRemote.authorizeAndPlayURI(playURI)
+  }
+
+  func updateCurrentPlayingTrack(mediaItem: SpotifyModel.MediaItem) {
+    currentTrack = mediaItem
   }
 
   func disconnect() {
@@ -80,8 +85,10 @@ class MainViewModel: NSObject, SPTAppRemoteDelegate, ObservableObject {
     }
   }
 
-  func authorize() {
-    appRemote.authorizeAndPlayURI(playURI)
+  func connect() {
+    if self.accessToken != nil {
+        appRemote.connect()
+    }
   }
 
   func handleURL(_ url: URL) {

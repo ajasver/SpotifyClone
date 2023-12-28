@@ -21,11 +21,8 @@ struct PlayStopButton: View {
 
       // The play/stop/buffering icon
       ZStack(alignment: .center) {
-        if audioManager.isBuffering && audioManager.lastItemPlayedID == media.id {
-          ProgressView()
-            .scaledToFit()
-        } else {
-          if audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id {
+        
+          if audioManager.isPlaying && audioManager.lastItemPlayedID == media.id {
             Image("stop")
               .resizeToFit()
               .onTapGesture {
@@ -40,30 +37,23 @@ struct PlayStopButton: View {
                 // set to true just to eliminate the small delay of the timer that checks if isBuffering
                 audioManager.isBuffering = true
                 audioManager.checkIfIsBuffering()
-
-                if media.previewURL.isEmpty {
-                  audioManager.playWithItunes(forItem: media, canPlayMoreThanOneAudio: true)
-                } else {
-                  audioManager.pause()
-                  var uri = media.previewURL
-                  switch media.mediaType {
-                  case .track:
-                    uri = "spotify:track:\(media.id)"
-                  case .episode:
-                    uri = "spotify:episode:\(media.id)"
-                  case .show:
-                    uri = "spotify:show:\(media.id)"
-                  case .album:
-                    uri = "spotify:album:\(media.id)"
-                  default:
-                    uri = media.id
-                  }
-
-                  audioManager.play(
-                    uri, audioID: uri)
+                audioManager.pause()
+                var uri = media.previewURL
+                switch media.mediaType {
+                case .track:
+                  uri = "spotify:track:\(media.id)"
+                case .episode:
+                  uri = "spotify:episode:\(media.id)"
+                case .show:
+                  uri = "spotify:show:\(media.id)"
+                case .album:
+                  uri = "spotify:album:\(media.id)"
+                default:
+                  uri = media.id
                 }
+                audioManager.play(
+                  uri, audioID: media.id)
               }
-          }
         }
       }
       .frame(width: 25, height: 25)

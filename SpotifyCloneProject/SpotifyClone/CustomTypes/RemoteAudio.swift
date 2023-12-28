@@ -23,10 +23,7 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
   // We need this because the player resets it's own rate tracker when user pauses, skips 5sec, etc...
   @Published private var currentRate: Float = 1.0
   @Published var state = PlaybackState.waitingForSelection
-
-  @Published private(set) var lastPlayedURL = ""
-  @Published private(set) var lastItemPlayedID = ""
-  @Published private(set) var showPauseButton = false
+  @Published private(set) var isPlaying = false
 
   // Used to check buffering. This is a workaround for cases where the `RemoteAudio.state` doesn't work
   @Published var isBuffering = false
@@ -38,9 +35,20 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
     mainVM.appRemote
   }
 
+  @Published var lastItemPlayedID = ""
+  
+  private var trackIDObserver: AnyCancellable? = nil
+  
   init(mainVM: MainViewModel) {
     self.mainVM = mainVM
     super.init()
+    trackIDObserver = mainVM.$currentTrack.sink { [weak self] track in
+      if let trackID = track?.id {
+        self?.lastItemPlayedID = String(trackID.split(separator: ":").last ?? "")
+      } else {
+        self?.lastItemPlayedID = ""
+      }
+    }
   }
 
   var defaultCallback: SPTAppRemoteCallback {
@@ -78,12 +86,12 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
 }
 
   func updatePlayPauseButtonState(_ paused: Bool) {
-    showPauseButton = !paused
+    isPlaying = !paused
   }
 
   func updateCurrentPlayingTrack(playerState: SPTAppRemotePlayerState) {
     let track = playerState.track
-    if track.uri != lastItemPlayedID {
+    if track.uri != self.mainVM.currentTrack?.id {
         let currentTrackArtist = track.artist.name
         let currentTrackName = track.name
         appRemote.imageAPI?.fetchImage(forItem: track, with: CGSize(width: 60, height: 60), callback: { (image, error) in
@@ -113,24 +121,22 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
 
 
   func play(_ audioURL: String, audioID: String) {
-    if lastPlayedURL != audioURL {
+    if lastItemPlayedID != audioURL {
       print("play!")
       appRemote.playerAPI?.play(audioURL, callback: defaultCallback)
     } else {
       appRemote.playerAPI?.resume()
-    }
-    lastItemPlayedID = audioURL
-    lastPlayedURL = audioURL
-    showPauseButton = true}
+    } 
+  }
 
   func pause() {
     appRemote.playerAPI?.pause(defaultCallback)
-    showPauseButton = false
+    print("pause!")
   }
 
   func stop() {
     appRemote.playerAPI?.pause(defaultCallback)
-    showPauseButton = false
+    print("stop!")
   }
 
 
@@ -162,12 +168,14 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
       isBuffering = false
       return
     }
-    isBuffering = false
+    let isPlaybackStalled = playerState.playbackSpeed == 0 && Double(playerState.playbackPosition) != lastPlaybackPosition
+    isBuffering = isPlaybackStalled
+    lastPlaybackPosition = Double(playerState.playbackPosition)*100
     return
+  }
 //    let isPlaybackStalled = playerState.playbackSpeed == 0 && playerState.playbackPosition != lastPlaybackPosition
 //    isBuffering = isPlaybackStalled
 //    lastPlaybackPosition = playerState.playbackPosition
-  }
 
   func startObservingForBufferingState() {
     bufferingCheckerTimer = Timer.publish(every: 0.1, on: .main, in: .common).autoconnect()
@@ -211,7 +219,6 @@ class RemoteAudio: NSObject, SPTAppRemotePlayerStateDelegate, ObservableObject {
     // Play and stop stop immediately to refresh the view if `isPaused`.
     appRemote.playerAPI?.play("")
     appRemote.playerAPI?.pause(defaultCallback)
-    self.showPauseButton = true
   }
 
   @ViewBuilder func buildSliderForAudio() -> some View {

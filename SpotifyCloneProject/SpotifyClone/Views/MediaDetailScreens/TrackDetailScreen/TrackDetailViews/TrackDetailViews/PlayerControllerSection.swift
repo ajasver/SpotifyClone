@@ -30,9 +30,9 @@ struct PlayerControllerSection: View {
         Spacer()
         ForwardButton( isSmallDisplay: isSmallDisplay).environmentObject(audioManager)
         Spacer()
-        HeartButton(mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id, itemType: .track)
-          .frame(width: isSmallDisplay ? 20 : 25)
-        Spacer()
+        // HeartButton(mediaDetailVM: mediaDetailVM, itemID: mediaDetailVM.mainItem!.id, itemType: .track)
+        //   .frame(width: isSmallDisplay ? 20 : 25)
+        // Spacer()
       }
     }
     .padding(.bottom, isSmallDisplay ? -5 : 0)
@@ -103,12 +103,9 @@ struct PlayerControllerSection: View {
 
     var body: some View {
       Button {
-        if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty {
+        if audioManager.isPlaying && audioManager.lastItemPlayedID == mediaDetailVM.mainItem!.id {
           audioManager.pause()
         } else {
-          if mediaDetailVM.mainItem!.previewURL.isEmpty {
-            audioManager.playWithItunes(forItem: mediaDetailVM.mainItem!, canPlayMoreThanOneAudio: false)
-          } else {
             var uri = mediaDetailVM.mainItem!.previewURL
             switch mediaDetailVM.mainItem!.mediaType {
             case .track:
@@ -122,12 +119,11 @@ struct PlayerControllerSection: View {
             default:
               uri = mediaDetailVM.mainItem!.id
             }
-            audioManager.play(uri, audioID: uri)
-             }
+          audioManager.play(uri, audioID: mediaDetailVM.mainItem!.id)
         }
       } label: {
         ZStack {
-          if audioManager.showPauseButton && !audioManager.lastPlayedURL.isEmpty {
+          if audioManager.isPlaying && audioManager.lastItemPlayedID == mediaDetailVM.mainItem!.id {
             Image("circle-stop")
               .resizeToFit()
           } else {

@@ -112,7 +112,7 @@ struct AlbumDetailScreen_Previews: PreviewProvider {
                            mediaDetailVM: MediaDetailViewModel(mainVM: mainVM))
       VStack {
         Spacer()
-        BottomBar(mainVM: mainVM, showMediaPlayer: true)
+        BottomBar(mainVM: mainVM)
       }
     }
   }

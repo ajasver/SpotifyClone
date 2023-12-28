@@ -12,33 +12,21 @@ import SwiftUI
 struct BottomBar: View {
   @StateObject var mainVM: MainViewModel
   @EnvironmentObject var audioManager: RemoteAudio
-  var showMediaPlayer = false
 
-  var body: some View {
-    VStack(spacing: 0) {
-      Spacer()
-      if let currentTrack = mainVM.currentTrack {
-        BottomMediaPlayerBar(media: currentTrack).environmentObject(audioManager)
-      }
-//        BottomNavigationBar(mainVM: mainVM)
-      
-    }
-    // So it doesn't go up when keyboard is open
-    .ignoresSafeArea(.keyboard, edges: .bottom)
-  }
-}
-
-private struct BottomMediaPlayerBar: View {
-  var media: SpotifyModel.MediaItem
   private var lowestResImageURL: String {
+    if let media = mainVM.currentTrack {
       if media.lowResImageURL != "" {
         return media.lowResImageURL ?? ""
       } else {
         return media.imageURL
       }
+    } else {
+      return ""
     }
-  private var songName: String { media.title }
-  @EnvironmentObject var audioManager: RemoteAudio
+  }
+  private var songName: String { mainVM.currentTrack?.title ?? "" }
+  private var authorName: [String] { mainVM.currentTrack?.authorName ?? [] }
+
 
   var body: some View {
     let cover =
@@ -56,7 +44,7 @@ private struct BottomMediaPlayerBar: View {
             VStack(alignment: .leading) {
               Text(songName).font(.avenir(.medium, size: Constants.fontSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
-              Text(media.authorName.joined(separator: ", ")).font(.avenir(.medium, size: Constants.fontXSmall))
+              Text(authorName.joined(separator: ", ")).font(.avenir(.medium, size: Constants.fontXSmall))
                 .frame(maxWidth: .infinity, alignment: .topLeading)
                 .opacity(Constants.opacityStandard)
             }
@@ -68,9 +56,9 @@ private struct BottomMediaPlayerBar: View {
               .resizeToFit()
               .frame(width: 25, height: 25)
               .opacity(Constants.opacityStandard)
-            PlayStopButton(media: media, size: 60).environmentObject(audioManager)
+            PlayStopButton(media: mainVM.currentTrack!, size: 60).environmentObject(audioManager)
               .fixedSize()
-          }
+        }
         }
         .frame(height: 80)
         .background(Color.spotifyLightGray)

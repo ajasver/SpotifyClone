@@ -77,6 +77,9 @@ struct TracksVerticalScrollView: View {
           }
           .opacity(Constants.opacityStandard)
         }
+        .onTapGesture {
+          audioManager.play("spotify:track:\(media.id)", audioID: media.id)
+        }
         .padding(.trailing, Constants.paddingStandard)
         Spacer()
         Image("three-dots")
@@ -97,7 +100,7 @@ struct TracksVerticalScrollView: View {
     let media: SpotifyModel.MediaItem
 
     @State var isTapped = false
-    private var isPlaying: Bool { audioManager.showPauseButton && audioManager.lastItemPlayedID == media.id }
+    private var isPlaying: Bool { isPlaying && audioManager.lastItemPlayedID == media.id }
     private var details: SpotifyModel.TrackDetails { SpotifyModel.getTrackDetails(for: media) }
     private var lowestResImageURL: String {
       if media.lowResImageURL != "" {
